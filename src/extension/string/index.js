@@ -4,7 +4,7 @@
 }] */
 
 
-// 去除字符串中的空格
+// 去除字符串中的所有空格
 String.prototype.trimAll = function trimAll() {
   return this.replace(/\s/g, '');
 };
@@ -22,10 +22,7 @@ String.prototype.trimStart = function trimStart() {
 // 检测字符串中是否包含指定的关键字
 // key : 指定的关键字
 String.prototype.contains = function contains(key) {
-  if (key === undefined || key === '' || key == null || key === 'undefined') {
-    return false;
-  }
-
+  if (!key.isNull()) return false;
   if (typeof (key) !== 'string') return false;
 
   const _str = this;
@@ -190,7 +187,7 @@ String.prototype.toFormDate = function toFormDate() {
   return new Date(parseInt(this.substr(6), 10)).Format('yyyy-MM-dd');
 };
 
-// String转化为Number
+// String 转化为 Number
 String.prototype.toInt = function toInt() {
   return isNaN(parseInt(this, 10)) ? 0 : parseInt(this, 10);
 };
@@ -200,7 +197,7 @@ String.prototype.toThousand = function toThousand() {
   return isNaN(parseFloat(this)) ? this : parseFloat(this).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 };
 
-// String转化为Float
+// String 转化为 Float
 String.prototype.toFloat = function toFloat() {
   return isNaN(parseFloat(this)) ? 0 : parseFloat(this);
 };

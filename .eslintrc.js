@@ -26,6 +26,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-plusplus': 'off',
+    'guard-for-in': 'off',
     'no-underscore-dangle': 'off',
     'linebreak-style': ["off", "windows"],
     "no-restricted-syntax": 0,
