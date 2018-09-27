@@ -30,6 +30,11 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'linebreak-style': ["off", "windows"],
     "no-restricted-syntax": 0,
+    'no-prototype-builtins': 'off',
+    'no-restricted-properties': 'off',
+    'no-extend-native': ["error", {
+      "exceptions": ["Number", "Object", "Array", "String", "Date"]
+    }],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',

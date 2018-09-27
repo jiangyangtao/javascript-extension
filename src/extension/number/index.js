@@ -1,8 +1,3 @@
-/* eslint no-extend-native: ["error", { "exceptions": ["Number"] }] */
-/* eslint no-restricted-properties: [2, {
-    "object": "require"
-}] */
-
 // 计算时间差异
 Number.prototype.diffTimer = function diffTimer() {
   const _second = this;

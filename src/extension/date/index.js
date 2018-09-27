@@ -1,5 +1,3 @@
-/* eslint no-extend-native: ["error", { "exceptions": ["Date"] }] */
-
 // 时间格式化
 Date.prototype.Format = function Format(fmt) {
   let _fmt = fmt;

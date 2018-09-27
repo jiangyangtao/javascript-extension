@@ -1,5 +1,3 @@
-/* eslint no-extend-native: ["error", { "exceptions": ["Array"] }] */
-
 // 移除数组中的空元素
 Array.prototype.trimEmpty = function trimEmpty() {
   const array = this;
@@ -14,8 +12,9 @@ Array.prototype.trimEmpty = function trimEmpty() {
   return narray;
 };
 
-// 找到数组中指定元素的索引
-Array.prototype.findIndex = function findIndex(element) {
+
+// 搜索与指定条件相匹配的元素，并返回 Array 中从指定索引到最后一个元素的元素范围内第一个匹配项的从零开始的索引
+Array.prototype.findFirstIndex = function findFirstIndex(element) {
   for (let i = 0; i < this.length; i++) {
     if (this[i] === element) {
       return i;
@@ -24,7 +23,19 @@ Array.prototype.findIndex = function findIndex(element) {
   return -1;
 };
 
-// 移除数组中的指定元素
+
+// 搜索与指定条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内最后一个匹配项的从零开始的索引。
+Array.prototype.findLastIndex = function findLastIndex(element) {
+  let index = -1;
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === element) {
+      index = i;
+    }
+  }
+  return index;
+};
+
+// 移除数组中的指定条件的元素
 Array.prototype.remove = function remove(element) {
   if (this.length <= 0) return this;
   for (let i = this.length - 1; i > -1; i--) {
@@ -35,7 +46,7 @@ Array.prototype.remove = function remove(element) {
 
 // 移除数组中的指定索引处的元素
 Array.prototype.removeAt = function removeAt(index) {
-  if (this.length <= 0 || i < 0 || i >= this.length) return this;
+  if (this.length <= 0 || index < 0 || index >= this.length) return this;
   return this.splice(index, 1);
 };
 
@@ -56,8 +67,8 @@ Array.prototype.unique = function unique(isStrict) {
   return newArr;
 };
 
-// 去除数组中重复的元素
-Array.prototype.arrayUnique = function arrayUnique() {
+// 移除数组中重复的元素
+Array.prototype.removeRepeat = function removeRepeat() {
   return this.filter((element, index, self) => self.indexOf(element) === index);
 };
 
@@ -140,25 +151,28 @@ Array.prototype.getMinValue = function getMinValue() {
   return oValue;
 };
 
-// 数组尾部追加元素
-Array.prototype.add = function add(element) {
-  return this.push(element);
-};
-
-// 数组头部追加元素
-Array.prototype.insert = function insert(element) {
+// 在数组头部追加元素
+Array.prototype.insert = function insert(value) {
   const _arr = [];
-  _arr[0] = element;
+  _arr[0] = value;
   for (let i = 0; i < this.length; i++) {
     _arr.push(this[i]);
   }
   return _arr;
 };
 
-// 替换数组内部的元素
-Array.prototype.replace = function replace(index, element) {
-  if (this.length <= 0 || i < 0 || i >= this.length) return this;
-  return this.splice(index, 1, element);
-}
+// 将某值设置给二维 Array 中指定位置的元素
+Array.prototype.setValue = function setValue(index, value) {
+  if (this.length <= 0 || index < 0 || index >= this.length) return this;
+  return this.splice(index, 1, value);
+};
+
+// 替换数组中指定条件的所有元素
+Array.prototype.replace = function replace(value) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === value) this.splice(i, 1, value);
+  }
+  return this;
+};
 
 export default Array;
