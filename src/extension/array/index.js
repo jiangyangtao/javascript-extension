@@ -26,16 +26,16 @@ Array.prototype.findIndex = function findIndex(element) {
 
 // 移除数组中的指定元素
 Array.prototype.remove = function remove(element) {
-  for (let i = 0; i < this.length; i++) {
-    if (this[i] === element) {
-      return this.removeAt(i);
-    }
+  if (this.length <= 0) return this;
+  for (let i = this.length - 1; i > -1; i--) {
+    if (this[i] === element) this.splice(i, 1);
   }
   return this;
 };
 
 // 移除数组中的指定索引处的元素
 Array.prototype.removeAt = function removeAt(index) {
+  if (this.length <= 0 || i < 0 || i >= this.length) return this;
   return this.splice(index, 1);
 };
 
@@ -54,6 +54,11 @@ Array.prototype.unique = function unique(isStrict) {
     }
   }
   return newArr;
+};
+
+// 去除数组中重复的元素
+Array.prototype.arrayUnique = function arrayUnique() {
+  return this.filter((element, index, self) => self.indexOf(element) === index);
 };
 
 // 统计元素在数组中出现的次数
@@ -76,11 +81,9 @@ Array.prototype.sameCount = function sameCount() {
 
 // 检测数组中是否包含指定元素
 Array.prototype.contains = function contains(element) {
-  if (element === null || element === undefined || element === '') return false;
-  const _arr = this;
-  if (_arr.length <= 0) return false;
-  for (let i = 0; i < _arr.length; i++) {
-    if (_arr[i] === element) return true;
+  if (this.length <= 0) return false;
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === element) return true;
   }
   return false;
 };
@@ -151,5 +154,11 @@ Array.prototype.insert = function insert(element) {
   }
   return _arr;
 };
+
+// 替换数组内部的元素
+Array.prototype.replace = function replace(index, element) {
+  if (this.length <= 0 || i < 0 || i >= this.length) return this;
+  return this.splice(index, 1, element);
+}
 
 export default Array;
