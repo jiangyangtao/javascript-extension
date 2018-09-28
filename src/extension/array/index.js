@@ -1,38 +1,67 @@
 // 移除数组中的空元素
-Array.prototype.trimEmpty = function trimEmpty() {
-  const array = this;
-  const narray = [];
-  for (let i = 0; i < array.length; i++) {
-    if (array[i]) {
-      if (typeof array[i] === 'string') {
-        if (array[i].trim()) narray.push(array[i]);
-      } else narray.push(array[i]);
+if (!Array.prototype.trimEmpty) {
+  Array.prototype.trimEmpty = function trimEmpty() {
+    "use strict";
+    if (this === void 0 || this === null) throw new TypeError();
+    const array = this;
+    const narray = [];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i]) {
+        if (typeof array[i] === 'string') {
+          if (array[i].trim()) narray.push(array[i]);
+        } else narray.push(array[i]);
+      }
     }
-  }
-  return narray;
-};
+    return narray;
+  };
+}
 
 
-// 搜索与指定条件相匹配的元素，并返回 Array 中从指定索引到最后一个元素的元素范围内第一个匹配项的从零开始的索引
-Array.prototype.findFirstIndex = function findFirstIndex(element) {
+// 搜索与指定条件相匹配的元素，并返回 Array 中从零开始的索引到最后一个元素的元素范围内第一个匹配项的索引
+Array.prototype.findFirstIndex = function findFirstIndex(object) {
   for (let i = 0; i < this.length; i++) {
-    if (this[i] === element) {
-      return i;
+    if (typeof object === 'function') {
+      if (object(this[i], i)) return {
+        index: i,
+        value: this[i]
+      };
+    } else if (this[i] === object) {
+      return {
+        index: i,
+        value: this[i]
+      };
     }
   }
-  return -1;
+  return {
+    index: -1,
+    value: null
+  };
 };
 
 
-// 搜索与指定条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内最后一个匹配项的从零开始的索引。
-Array.prototype.findLastIndex = function findLastIndex(element) {
+// 搜索与指定条件相匹配的元素，并返回 Array 中从零开始的索引到最后一个元素的元素范围内最后一个匹配项的索引
+Array.prototype.findLastIndex = function findLastIndex(object) {
   let index = -1;
   for (let i = 0; i < this.length; i++) {
-    if (this[i] === element) {
+    if (typeof object === 'function') {
+      if (object(this[i], i)) index = i;
+    } else if (this[i] === object) {
       index = i;
     }
   }
   return index;
+};
+
+
+// 搜索与指定条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内所有匹配项的从零开始的索引
+Array.prototype.findAllIndex = function findAllIndex(object) {
+  const indexArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if (typeof object === 'function') {
+      if (object(this[i], i)) indexArray.push(i);
+    } else if (this[i] === object) indexArray.push(i);
+  }
+  return indexArray;
 };
 
 // 移除数组中的指定条件的元素
@@ -155,22 +184,22 @@ Array.prototype.getMinValue = function getMinValue() {
 Array.prototype.insert = function insert(value) {
   const _arr = [];
   _arr[0] = value;
-  for (let i = 0; i < this.length; i++) {
+  for (const i in this) {
     _arr.push(this[i]);
   }
   return _arr;
 };
 
-// 将某值设置给二维 Array 中指定位置的元素
+// 将某值设置给 Array 中指定位置的元素
 Array.prototype.setValue = function setValue(index, value) {
   if (this.length <= 0 || index < 0 || index >= this.length) return this;
   return this.splice(index, 1, value);
 };
 
 // 替换数组中指定条件的所有元素
-Array.prototype.replace = function replace(value) {
+Array.prototype.replace = function replace(conditions, value) {
   for (let i = 0; i < this.length; i++) {
-    if (this[i] === value) this.splice(i, 1, value);
+    if (this[i] === conditions) this.splice(i, 1, value);
   }
   return this;
 };
