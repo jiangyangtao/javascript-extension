@@ -1,6 +1,8 @@
 // 计算时间差异
 if (!Number.prototype.diffTimer) {
   Number.prototype.diffTimer = function diffTimer() {
+    if (this === undefined || this === null) throw new TypeError();
+
     const _second = this;
     let second = parseInt(_second, 10);
     let minute = 0;
@@ -26,9 +28,12 @@ if (!Number.prototype.diffTimer) {
 
 // 数字补零
 if (!Number.prototype.LenWithZero) {
-  Number.prototype.LenWithZero = function LenWithZero(oCount) {
+  Number.prototype.fillZero = function fillZero(zero) {
+    if (this === undefined || this === null) throw new TypeError();
+    if (zero === undefined || zero === null || typeof zero !== 'string') throw new TypeError();
+
     let strText = this.toString();
-    while (strText.length < oCount) {
+    while (strText.length < zero) {
       strText += '0';
     }
     return strText;
@@ -38,6 +43,8 @@ if (!Number.prototype.LenWithZero) {
 // 获取大小
 if (!Number.prototype.getSize) {
   Number.prototype.getSize = function getSize() {
+    if (this === undefined || this === null) throw new TypeError();
+
     const _bytes = this;
     if (_bytes === 0) return '0 B';
     const k = 1024;
@@ -50,6 +57,8 @@ if (!Number.prototype.getSize) {
 // 转为千分位显示
 if (!Number.prototype.toThousand) {
   Number.prototype.toThousand = function toThousand() {
+    if (this === undefined || this === null) throw new TypeError();
+
     return this.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
   };
 }

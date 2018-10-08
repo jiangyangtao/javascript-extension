@@ -1,8 +1,7 @@
 // 时间格式化
 if (!Date.prototype.Format) {
   Date.prototype.Format = function Format(fmt) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
 
     let _fmt = fmt;
     const o = {
@@ -29,10 +28,9 @@ if (!Date.prototype.Format) {
 // 指定日期增加天数
 if (!Date.prototype.addDay) {
   Date.prototype.addDay = function addDay(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getDate() + value);
     return this;
   };
@@ -41,10 +39,9 @@ if (!Date.prototype.addDay) {
 // 指定时间增加小时数
 if (!Date.prototype.addHours) {
   Date.prototype.addHours = function addHours(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getHours() + value);
     return this;
   };
@@ -53,10 +50,9 @@ if (!Date.prototype.addHours) {
 // 指定时间增加毫秒数
 if (!Date.prototype.AddMilliseconds) {
   Date.prototype.AddMilliseconds = function AddMilliseconds(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getMilliseconds() + value);
     return this;
   };
@@ -65,10 +61,9 @@ if (!Date.prototype.AddMilliseconds) {
 // 指定时间增加分钟数
 if (!Date.prototype.addMinutes) {
   Date.prototype.addMinutes = function addMinutes(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getMinutes() + value);
     return this;
   };
@@ -77,10 +72,9 @@ if (!Date.prototype.addMinutes) {
 // 指定时间增加月数
 if (!Date.prototype.addMonths) {
   Date.prototype.addMonths = function addMonths(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getMonth() + value);
     return this;
   };
@@ -89,10 +83,9 @@ if (!Date.prototype.addMonths) {
 // 指定时间增加秒数
 if (!Date.prototype.addSeconds) {
   Date.prototype.addSeconds = function addSeconds(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
+    if (!isNaN(value, 10)) throw new Error('NaN');
 
-    if (value === 0) return this;
     this.setDate(this.getSeconds() + value);
     return this;
   };
@@ -101,8 +94,7 @@ if (!Date.prototype.addSeconds) {
 // 指定时间增加年数
 if (!Date.prototype.addYears) {
   Date.prototype.addYears = function addYears(value = 0) {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
 
     if (value === 0) return this;
     this.setDate(this.getDate() + value);
@@ -113,8 +105,7 @@ if (!Date.prototype.addYears) {
 // 获取指定时间的时间戳
 if (!Date.prototype.getUnixTime) {
   Date.prototype.getUnixTime = function getUnixTime() {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
 
     const _timestamp = Date.parse(this);
     return _timestamp / 1000;
@@ -124,8 +115,7 @@ if (!Date.prototype.getUnixTime) {
 // 获取指定日期的第一天的日期
 if (!Date.prototype.firstDayOfMonth) {
   Date.prototype.firstDayOfMonth = function firstDayOfMonth() {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
 
     const _date = this;
     _date.setDate(1);
@@ -136,8 +126,7 @@ if (!Date.prototype.firstDayOfMonth) {
 // 获取指定日期的最后一天的日期
 if (!Date.prototype.lastDayOfMonth) {
   Date.prototype.lastDayOfMonth = function lastDayOfMonth() {
-    "use strict";
-    if (this === void 0 || this === null) throw new TypeError();
+    if (this === undefined || this === null) throw new TypeError();
 
     const date = this;
     let currentMonth = date.getMonth();
