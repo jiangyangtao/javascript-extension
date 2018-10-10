@@ -1,27 +1,32 @@
 // 时间格式化
 if (!Date.prototype.Format) {
-  Date.prototype.Format = function Format(fmt) {
+  Date.prototype.format = function format(fmt) {
     if (this === undefined || this === null) throw new TypeError();
 
-    let _fmt = fmt;
     const o = {
-      'M+': this.getMonth() + 1, // 月份
-      'd+': this.getDate(), // 日
-      'h+': this.getHours(), // 小时
-      'm+': this.getMinutes(), // 分
-      's+': this.getSeconds(), // 秒
-      'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
-      S: this.getMilliseconds(), // 毫秒
+      'M+': this.getMonth() + 1,
+      'd+': this.getDate(),
+      'h+': this.getHours(),
+      'm+': this.getMinutes(),
+      's+': this.getSeconds(),
+      'q+': Math.floor((this.getMonth() + 3) / 3),
+      S: this.getMilliseconds(),
     };
-    if (/(y+)/.test(_fmt)) {
-      _fmt = _fmt.replace(RegExp.$1, (`${this.getFullYear()}`).substr(4 - RegExp.$1.length));
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        `${this.getFullYear()}`.substr(4 - RegExp.$1.length),
+      );
     }
     for (const k in o) {
-      if (new RegExp(`(${k})`).test(_fmt)) {
-        _fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : ((`00${o[k]}`).substr((`${o[k]}`).length)));
+      if (new RegExp(`(${k})`).test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length),
+        );
       }
     }
-    return _fmt;
+    return fmt;
   };
 }
 
@@ -49,7 +54,7 @@ if (!Date.prototype.addHours) {
 
 // 指定时间增加毫秒数
 if (!Date.prototype.AddMilliseconds) {
-  Date.prototype.AddMilliseconds = function AddMilliseconds(value = 0) {
+  Date.prototype.addMilliseconds = function AddMilliseconds(value = 0) {
     if (this === undefined || this === null) throw new TypeError();
     if (!isNaN(value, 10)) throw new Error('NaN');
 
