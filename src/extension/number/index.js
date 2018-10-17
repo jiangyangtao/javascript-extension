@@ -1,3 +1,7 @@
+import {
+  throws,
+} from 'assert';
+
 // 计算时间差异
 if (!Number.prototype.diffTimer) {
   Number.prototype.diffTimer = function diffTimer() {
@@ -60,6 +64,15 @@ if (!Number.prototype.toThousand) {
     if (this === undefined || this === null) throw new TypeError();
 
     return this.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+  };
+}
+
+// 时间戳转换为时间
+if (!Number.prototype.toDate) {
+  Number.prototype.toDate = function toDate() {
+    if (this === undefined || this === null || this < 0) throw new TypeError();
+
+    return new Date(this);
   };
 }
 

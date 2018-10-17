@@ -133,12 +133,14 @@ if (!Array.prototype.keySort) {
 
 // 检测数组中是否包含指定元素
 if (!Array.prototype.contains) {
-  Array.prototype.contains = function contains(element) {
+  Array.prototype.contains = function contains(object, thisArg) {
     if (this === undefined || this === null) throw new TypeError();
 
     if (this.length <= 0) return false;
     for (let i = 0; i < this.length; i++) {
-      if (this[i] === element) return true;
+      if (typeof object === 'function') {
+        if (object.call(thisArg, this[i], i)) return true;
+      } else if (this[i] === object) return true;
     }
     return false;
   };

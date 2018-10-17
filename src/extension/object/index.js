@@ -7,3 +7,18 @@ if (!Object.prototype.forEach) {
     }
   };
 }
+
+// 检测 object 对象是否为 null 或者为 undefined
+if (!Object.prototype.isNull) {
+  Object.prototype.isNull = function isNull() {
+    if (this === undefined || this == null) return true;
+    return false;
+  };
+}
+
+// 检测 object 对象不为 null 和不为 undefined
+if (!Object.prototype.notNull) {
+  Object.prototype.notNull = function notNull() {
+    return !this.isNull();
+  };
+}

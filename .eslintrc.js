@@ -23,6 +23,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    "max-len": "off",
     "no-plusplus": "off",
     "guard-for-in": "off",
     "no-underscore-dangle": "off",
