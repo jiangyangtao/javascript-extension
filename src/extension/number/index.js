@@ -1,7 +1,7 @@
 // 计算秒数的用时时间
 if (!Number.prototype.diffTimer) {
   Object.defineProperty(Number.prototype, 'diffTimer', {
-    value() {
+    value: function diffTimer() {
       if (this === undefined || this === null) throw new TypeError();
 
       const _second = this;
@@ -31,7 +31,7 @@ if (!Number.prototype.diffTimer) {
 // 数字补零
 if (!Number.prototype.LenWithZero) {
   Object.defineProperty(Number.prototype, 'fillZero', {
-    value(zero) {
+    value: function LenWithZero(zero) {
       if (this === undefined || this === null) throw new TypeError();
       if (zero === undefined || zero === null || typeof zero !== 'string') throw new TypeError();
 
@@ -47,7 +47,7 @@ if (!Number.prototype.LenWithZero) {
 // 计算字节占用容量
 if (!Number.prototype.getSize) {
   Object.defineProperty(Number.prototype, 'getSize', {
-    value() {
+    value: function getSize() {
       if (this === undefined || this === null) throw new TypeError();
 
       const _bytes = this;
@@ -63,7 +63,7 @@ if (!Number.prototype.getSize) {
 // 转为千分位显示
 if (!Number.prototype.toThousand) {
   Object.defineProperty(Number.prototype, 'toThousand', {
-    value() {
+    value: function toThousand() {
       if (this === undefined || this === null) throw new TypeError();
 
       return this.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
@@ -74,7 +74,7 @@ if (!Number.prototype.toThousand) {
 // 时间戳转换为时间
 if (!Number.prototype.toDate) {
   Object.defineProperty(Number.prototype, 'toDate', {
-    value() {
+    value: function toDate() {
       if (this === undefined || this === null || this < 0) throw new TypeError();
 
       return new Date(this);

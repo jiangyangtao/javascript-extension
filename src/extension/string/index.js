@@ -1,7 +1,7 @@
 // 去除字符串中的所有空格
 if (!String.prototype.trimAll) {
   Object.defineProperty(String.prototype, 'trimAll', {
-    value() {
+    value: function trimAll() {
       if (!this) throw new TypeError();
 
       return this.replace(/\s/g, '');
@@ -12,7 +12,7 @@ if (!String.prototype.trimAll) {
 // 去除字符串中的尾部空格
 if (!String.prototype.trimEnd) {
   Object.defineProperty(String.prototype, 'trimEnd', {
-    value() {
+    value: function trimEnd() {
       if (!this) throw new TypeError();
 
       return this.replace(/(\s*$)/g, '');
@@ -23,7 +23,7 @@ if (!String.prototype.trimEnd) {
 // 去除字符串中的头部空格
 if (!String.prototype.trimStart) {
   Object.defineProperty(String.prototype, 'trimStart', {
-    value() {
+    value: function trimStart() {
       if (!this) throw new TypeError();
 
       return this.replace(/(^\s*)/g, '');
@@ -35,7 +35,7 @@ if (!String.prototype.trimStart) {
 // key : 指定的关键字
 if (!String.prototype.contains) {
   Object.defineProperty(String.prototype, 'contains', {
-    value(key) {
+    value: function contains(key) {
       if (!this) throw new TypeError();
 
       if (!key.isNull()) return false;
@@ -56,11 +56,11 @@ if (!String.prototype.contains) {
 // 字符串末尾追加
 if (!String.prototype.append) {
   Object.defineProperty(String.prototype, 'append', {
-    value(str) {
+    value: function append(str) {
       if (!this) throw new TypeError();
 
-      const _self = this;
-      const _str = _self + str.toString();
+      const self = this;
+      const _str = self + str.toString();
       return _str;
     },
   });
@@ -69,7 +69,7 @@ if (!String.prototype.append) {
 // 移除指定字符串
 if (!String.prototype.remove) {
   Object.defineProperty(String.prototype, 'remove', {
-    value(key) {
+    value: function remove(key) {
       if (!this) throw new TypeError();
 
       return this.replace(new RegExp(key, 'g'), '');
@@ -80,7 +80,7 @@ if (!String.prototype.remove) {
 // 替换当前字符串中所有符合条件的字符
 if (!String.prototype.replaceAll) {
   Object.defineProperty(String.prototype, 'replaceAll', {
-    value(key, value) {
+    value: function replaceAll(key, value) {
       if (!this) throw new TypeError();
 
       return this.replace(new RegExp(key, 'g'), value);
@@ -92,7 +92,7 @@ if (!String.prototype.replaceAll) {
 // 计算字符串长度，每个汉字占两个长度，英文字符每个占一个长度
 if (!String.prototype.bytesLength) {
   Object.defineProperty(String.prototype, 'bytesLength', {
-    value() {
+    value: function bytesLength() {
       if (!this) throw new TypeError();
 
       let sum = 0;
@@ -106,9 +106,9 @@ if (!String.prototype.bytesLength) {
 }
 
 // 身份证验证
-if (!String.prototype.verifyIdentityNumber) {
-  Object.defineProperty(String.prototype, 'verifyIdentityNumber', {
-    value() {
+if (!String.prototype.isChinaIdentityNumber) {
+  Object.defineProperty(String.prototype, 'isChinaIdentityNumber', {
+    value: function isChinaIdentityNumber() {
       if (!this) throw new TypeError();
 
       let _card = this;
@@ -168,12 +168,12 @@ if (!String.prototype.verifyIdentityNumber) {
 }
 
 // 根据身份证获取性别文字
-if (!String.prototype.getSexTextByIdNumber) {
-  Object.defineProperty(String.prototype, 'getSexTextByIdNumber', {
-    value() {
+if (!String.prototype.getSexTextByChinaIdNumber) {
+  Object.defineProperty(String.prototype, 'getSexTextByChinaIdNumber', {
+    value: function getSexTextByChinaIdNumber() {
       if (!this) throw new TypeError();
 
-      if (!this.verifyIdentityNumber()) return '';
+      if (!this.isChinaIdentityNumber()) return '';
       const _card = this;
       return _card.substr(16, 1) % 2 ? '男' : '女';
     },
@@ -181,25 +181,25 @@ if (!String.prototype.getSexTextByIdNumber) {
 }
 
 // 根据身份证获取性别数字
-if (!String.prototype.getSexNoByIdNumber) {
-  Object.defineProperty(String.prototype, 'getSexNoByIdNumber', {
-    value() {
+if (!String.prototype.getSexNoByChinaIdNumber) {
+  Object.defineProperty(String.prototype, 'getSexNoByChinaIdNumber', {
+    value: function getSexNoByChinaIdNumber() {
       if (!this) throw new TypeError();
 
-      if (!this.verifyIdentityNumber()) return -1;
-      const _card = this;
-      return parseInt(_card.substr(16, 1), 10);
+      if (!this.isChinaIdentityNumber()) return -1;
+      const card = this;
+      return parseInt(card.substr(16, 1), 10);
     },
   });
 }
 
 // 根据身份证获取出身日期
-if (!String.prototype.getBirthdayByIdNumber) {
-  Object.defineProperty(String.prototype, 'getBirthdayByIdNumber', {
-    value() {
+if (!String.prototype.getBirthdayByChinaIdNumber) {
+  Object.defineProperty(String.prototype, 'getBirthdayByChinaIdNumber', {
+    value: function getBirthdayByChinaIdNumber() {
       if (!this) throw new TypeError();
 
-      if (!this.verifyIdentityNumber()) return '';
+      if (!this.isChinaIdentityNumber()) return '';
       const _card = this;
       if (_card.length !== 18) return '';
       return `${_card.substr(6, 4)}-${_card.substr(10, 2)}-${_card.substr(12, 2)}`;
@@ -210,7 +210,7 @@ if (!String.prototype.getBirthdayByIdNumber) {
 // 根据身份证获取年龄
 if (!String.prototype.getAgeByIdNumber) {
   Object.defineProperty(String.prototype, 'getAgeByIdNumber', {
-    value() {
+    value: function getAgeByIdNumber() {
       if (!this) throw new TypeError();
 
       if (!this.verifyIdentityNumber()) return -1;
@@ -225,15 +225,52 @@ if (!String.prototype.getAgeByIdNumber) {
 // 获取url参数值
 if (!String.prototype.getUrlParam) {
   Object.defineProperty(String.prototype, 'getUrlParam', {
-    value(key) {
+    value: function getUrlParam(key) {
       if (!this) throw new TypeError();
 
-      let _url = this.toString();
-      _url = _url.substr(_url.lastIndexOf('?'));
+      let url = this.toString();
+      url = url.substr(url.lastIndexOf('?') + 1);
       const reg = new RegExp(`(^|&)${key}=([^&]*)(&|$)`);
-      const r = _url.substr(1).match(reg);
+      const r = url.substr(1).match(reg);
       if (r != null) return decodeURIComponent(r[2]);
       return null;
+    },
+  });
+}
+
+// 获取url参数部分的字符串
+if (!String.prototype.getQueryString) {
+  Object.defineProperty(String.prototype, 'getQueryString', {
+    value: function getQueryString() {
+      if (!this) throw new TypeError();
+
+      const url = this.toString();
+      return url.substr(url.lastIndexOf('?') + 1);
+    },
+  });
+}
+
+// 获取url参数，再转换为 object
+if (!String.prototype.getQueryToObject) {
+  Object.defineProperty(String.prototype, 'getQueryToObject', {
+    value: function getQueryToObject() {
+      if (!this) throw new TypeError();
+
+      const url = this.toString();
+      const paramStr = url.substr(url.lastIndexOf('?') + 1);
+      if (!paramStr) return null;
+      const paramArray = paramStr.split('&');
+      let json = null;
+      for (const i in paramArray) {
+        if (!json) json = {};
+        const item = paramArray[i];
+        const key = item.substring(0, item.indexOf('='));
+        let value = item.substr(item.indexOf('=') + 1);
+        if (value.isInt()) value = value.toInt();
+        else if (value.isFloat()) value = value.toFloat();
+        json[key] = value;
+      }
+      return json;
     },
   });
 }
@@ -241,7 +278,7 @@ if (!String.prototype.getUrlParam) {
 // 获取文件全名
 if (!String.prototype.getFileName) {
   Object.defineProperty(String.prototype, 'getFileName', {
-    value() {
+    value: function getFileName() {
       if (!this) throw new TypeError();
 
       const regEx = /^.*\/([^/?]*).*$/;
@@ -253,7 +290,7 @@ if (!String.prototype.getFileName) {
 // 获取文件扩展名
 if (!String.prototype.getExtendName) {
   Object.defineProperty(String.prototype, 'getExtendName', {
-    value() {
+    value: function getExtendName() {
       if (!this) throw new TypeError();
 
       const regEx = /^.*\/[^/]*(\.[^.?]*).*$/;
@@ -265,7 +302,7 @@ if (!String.prototype.getExtendName) {
 // 转换为时间类型
 if (!String.prototype.toDate) {
   Object.defineProperty(String.prototype, 'toDate', {
-    value() {
+    value: function toDate() {
       if (!this) throw new TypeError();
 
       return new Date(this);
@@ -276,7 +313,7 @@ if (!String.prototype.toDate) {
 // C#时间格式化
 if (!String.prototype.toFormDate) {
   Object.defineProperty(String.prototype, 'toFormDate', {
-    value() {
+    value: function toFormDate() {
       if (!this) throw new TypeError();
 
       return new Date(parseInt(this.substr(6), 10)).Format('yyyy-MM-dd');
@@ -284,10 +321,30 @@ if (!String.prototype.toFormDate) {
   });
 }
 
+// 检测字符串是否为 int
+if (!String.prototype.isInt) {
+  Object.defineProperty(String.prototype, 'isInt', {
+    value: function isInt() {
+      const partten = /(^[1-9][0-9]*$)|(^[0-9]$)/;
+      return partten.test(this);
+    },
+  });
+}
+
+// 检测字符串是否为 float
+if (!String.prototype.isFloat) {
+  Object.defineProperty(String.prototype, 'isFloat', {
+    value: function isFloat() {
+      const partten = /(^[1-9][0-9]*[\\.]{0,1}[0-9]*[0-9]$)|(^[0].[0-9]*[0-9]$)|(^[0-9]$)/;
+      return partten.test(this);
+    },
+  });
+}
+
 // String 转化为 Number
 if (!String.prototype.toInt) {
   Object.defineProperty(String.prototype, 'toInt', {
-    value() {
+    value: function toInt() {
       if (!this) throw new TypeError();
 
       return isNaN(parseInt(this, 10)) ? 0 : parseInt(this, 10);
@@ -298,7 +355,7 @@ if (!String.prototype.toInt) {
 // 转为千分位显示
 if (!String.prototype.toThousand) {
   Object.defineProperty(String.prototype, 'toThousand', {
-    value() {
+    value: function toThousand() {
       if (!this) throw new TypeError();
 
       return isNaN(parseFloat(this)) ? this : parseFloat(this).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
@@ -309,7 +366,7 @@ if (!String.prototype.toThousand) {
 // String 转化为 Float
 if (!String.prototype.toFloat) {
   Object.defineProperty(String.prototype, 'toFloat', {
-    value() {
+    value: function toFloat() {
       if (!this) throw new TypeError();
 
       return isNaN(parseFloat(this)) ? 0 : parseFloat(this);
@@ -321,7 +378,7 @@ if (!String.prototype.toFloat) {
 // symbol 分割符，默认以逗号分割
 if (!String.prototype.toSplitArray) {
   Object.defineProperty(String.prototype, 'toSplitArray', {
-    value(symbol = ',') {
+    value: function toSplitArray(symbol = ',') {
       if (!this) throw new TypeError();
 
       return this.split(symbol);
@@ -332,7 +389,7 @@ if (!String.prototype.toSplitArray) {
 // 检测字符串是否为 null 或者为 undefined
 if (!String.prototype.isNull) {
   Object.defineProperty(String.prototype, 'isNull', {
-    value() {
+    value: function isNull() {
       if (this === undefined || this == null) return true;
       return false;
     },
@@ -342,7 +399,7 @@ if (!String.prototype.isNull) {
 // 检测字符串是否不为 null 和不为 undefined
 if (!String.prototype.notNull) {
   Object.defineProperty(String.prototype, 'notNull', {
-    value() {
+    value: function notNull() {
       return !this.isNull();
     },
   });
@@ -351,7 +408,7 @@ if (!String.prototype.notNull) {
 // 检测字符串是否为 null 或者为 undefined 或者为 ""
 if (!String.prototype.isNullOrEmpty) {
   Object.defineProperty(String.prototype, 'isNullOrEmpty', {
-    value() {
+    value: function isNullOrEmpty() {
       if (this === undefined || this == null || this === '') return true;
       return false;
     },
@@ -361,7 +418,7 @@ if (!String.prototype.isNullOrEmpty) {
 // 检测字符串是否不为 null 和不为 undefined 和不为 ""
 if (!String.prototype.notNullAndEmpty) {
   Object.defineProperty(String.prototype, 'notNullAndEmpty', {
-    value() {
+    value: function notNullAndEmpty() {
       return !this.isNullOrEmpty();
     },
   });

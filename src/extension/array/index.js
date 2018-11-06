@@ -1,7 +1,7 @@
 // 移除数组中的空元素
 if (!Array.prototype.trim) {
   Object.defineProperty(Array.prototype, 'trim', {
-    value() {
+    value: function trim() {
       if (this === undefined || this === null) throw new TypeError();
 
       const newArray = [];
@@ -21,7 +21,7 @@ if (!Array.prototype.trim) {
 // 搜索与指定条件相匹配的元素，并返回 Array 中从零开始的索引到最后一个元素的元素范围内第一个匹配项的索引
 if (!Array.prototype.findFirstIndex) {
   Object.defineProperty(Array.prototype, 'findFirstIndex', {
-    value(object, thisArg) {
+    value: function findFirstIndex(object, thisArg) {
       if (this === undefined || this === null) throw new TypeError();
 
       for (let i = 0; i < this.length; i++) {
@@ -38,7 +38,7 @@ if (!Array.prototype.findFirstIndex) {
 // 搜索与指定条件相匹配的元素，并返回 Array 中从零开始的索引到最后一个元素的元素范围内最后一个匹配项的索引
 if (!Array.prototype.findLastIndex) {
   Object.defineProperty(Array.prototype, 'findLastIndex', {
-    value(object, thisArg) {
+    value: function findLastIndex(object, thisArg) {
       if (this === undefined || this === null) throw new TypeError();
 
       let index = -1;
@@ -56,7 +56,7 @@ if (!Array.prototype.findLastIndex) {
 // 搜索与指定条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内所有匹配项的从零开始的索引
 if (!Array.prototype.findAllIndex) {
   Object.defineProperty(Array.prototype, 'findAllIndex', {
-    value(object, thisArg) {
+    value: function findAllIndex(object, thisArg) {
       if (this === undefined || this === null) throw new TypeError();
 
       const indexArray = [];
@@ -73,7 +73,7 @@ if (!Array.prototype.findAllIndex) {
 // 移除数组中的指定条件的元素
 if (!Array.prototype.remove) {
   Object.defineProperty(Array.prototype, 'remove', {
-    value(object, thisArg) {
+    value: function remove(object, thisArg) {
       if (this === undefined || this === null) throw new TypeError();
       if (this.length <= 0) return this;
 
@@ -90,7 +90,7 @@ if (!Array.prototype.remove) {
 // 移除数组中的指定索引处的元素
 if (!Array.prototype.removeAt) {
   Object.defineProperty(Array.prototype, 'removeAt', {
-    value(index) {
+    value: function removeAt(index) {
       if (this === undefined || this === null) throw new TypeError();
 
       if (this.length <= 0 || index < 0 || index >= this.length) return this;
@@ -102,7 +102,7 @@ if (!Array.prototype.removeAt) {
 // 移除数组中重复的元素
 if (!Array.prototype.removeRepeat) {
   Object.defineProperty(Array.prototype, 'removeRepeat', {
-    value() {
+    value: function removeRepeat() {
       if (this === undefined || this === null) throw new TypeError();
 
       return this.filter((element, index, self) => self.indexOf(element) === index);
@@ -113,7 +113,7 @@ if (!Array.prototype.removeRepeat) {
 // 统计元素在数组中出现的次数
 if (!Array.prototype.sameCount) {
   Object.defineProperty(Array.prototype, 'sameCount', {
-    value() {
+    value: function sameCount() {
       if (this === undefined || this === null) throw new TypeError();
 
       const arr = this;
@@ -137,13 +137,13 @@ if (!Array.prototype.sameCount) {
 // 数组关键字排序
 if (!Array.prototype.keySort) {
   Object.defineProperty(Array.prototype, 'keySort', {
-    value(key, orderby) {
+    value: function keySort(key, orderby) {
       if (this === undefined || this === null) throw new TypeError();
 
       let _order = true;
       if (orderby === 'desc') _order = false;
 
-      function keySort(_key, _sort) {
+      function sort(_key, _sort) {
         return (x, y) => {
           if (x[_key] > y[_key]) {
             if (!_sort) return -1;
@@ -157,7 +157,7 @@ if (!Array.prototype.keySort) {
           return 0;
         };
       }
-      return this.sort(keySort(key, _order));
+      return this.sort(sort(key, _order));
     },
   });
 }
@@ -165,7 +165,7 @@ if (!Array.prototype.keySort) {
 // 检测数组中是否包含指定元素
 if (!Array.prototype.contains) {
   Object.defineProperty(Array.prototype, 'contains', {
-    value(object, thisArg) {
+    value: function contains(object, thisArg) {
       if (this === undefined || this === null) throw new TypeError();
 
       if (this.length <= 0) return false;
@@ -182,7 +182,7 @@ if (!Array.prototype.contains) {
 // 数字数组由小到大排序
 if (!Array.prototype.minSortMax) {
   Object.defineProperty(Array.prototype, 'minSortMax', {
-    value() {
+    value: function minSortMax() {
       if (this === undefined || this === null) throw new TypeError();
 
       let oValue;
@@ -203,7 +203,7 @@ if (!Array.prototype.minSortMax) {
 // 数字数组由大到小排序
 if (!Array.prototype.maxSortMin) {
   Object.defineProperty(Array.prototype, 'maxSortMin', {
-    value() {
+    value: function maxSortMin() {
       if (this === undefined || this === null) throw new TypeError();
 
       let oValue;
@@ -224,7 +224,7 @@ if (!Array.prototype.maxSortMin) {
 // 获取数字数组中最大值
 if (!Array.prototype.getMaxValue) {
   Object.defineProperty(Array.prototype, 'getMaxValue', {
-    value() {
+    value: function getMaxValue() {
       if (this === undefined || this === null) throw new TypeError();
 
       let oValue = 0;
@@ -241,7 +241,7 @@ if (!Array.prototype.getMaxValue) {
 // 获取数字数组中最小值
 if (Array.prototype.getMinValue) {
   Object.defineProperty(Array.prototype, 'getMinValue', {
-    value() {
+    value: function getMinValue() {
       if (this === undefined || this === null) throw new TypeError();
 
       let oValue = 0;
@@ -258,7 +258,7 @@ if (Array.prototype.getMinValue) {
 // 在数组头部追加元素
 if (!Array.prototype.insert) {
   Object.defineProperty(Array.prototype, 'insert', {
-    value(value) {
+    value: function insert(value) {
       if (this === undefined || this === null) throw new TypeError();
 
       const newArray = [];
@@ -274,7 +274,7 @@ if (!Array.prototype.insert) {
 // 将某值设置给 Array 中指定位置的元素
 if (!Array.prototype.setValue) {
   Object.defineProperty(Array.prototype, 'setValue', {
-    value(index, value) {
+    value: function setValue(index, value) {
       if (this === undefined || this === null) throw new TypeError();
 
       if (this.length <= 0 || index < 0 || index >= this.length) return this;
@@ -286,7 +286,7 @@ if (!Array.prototype.setValue) {
 // 替换数组中指定条件的所有元素
 if (!Array.prototype.replace) {
   Object.defineProperty(Array.prototype, 'replace', {
-    value(conditions, value) {
+    value: function replace(conditions, value) {
       if (this === undefined || this === null) throw new TypeError();
 
       for (let i = 0; i < this.length; i++) {

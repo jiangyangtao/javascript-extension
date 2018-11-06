@@ -1,7 +1,7 @@
 // 时间格式化
 if (!Date.prototype.format) {
   Object.defineProperty(Date.prototype, 'format', {
-    value(fmt) {
+    value: function format(fmt) {
       if (this === undefined || this === null) throw new TypeError();
 
       const o = {
@@ -35,7 +35,7 @@ if (!Date.prototype.format) {
 // 转换到指定的时区，并返回指定时区的时间
 if (!Date.prototype.toTimezone) {
   Object.defineProperty(Date.prototype, 'toTimezone', {
-    value(value = 0) {
+    value: function toTimezone(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (typeof value !== 'number') throw new Error('parameter not a number.');
 
@@ -50,7 +50,7 @@ if (!Date.prototype.toTimezone) {
 // 获取本地时区
 if (!Date.prototype.getLocaleTimezone) {
   Object.defineProperty(Date.prototype, 'getLocaleTimezone', {
-    value() {
+    value: function getLocaleTimezone() {
       if (this === undefined || this === null) throw new TypeError();
 
       const now = new Date();
@@ -64,7 +64,7 @@ if (!Date.prototype.getLocaleTimezone) {
 // 将时间转换为 Ojbect 对象
 if (!Date.prototype.toObject) {
   Object.defineProperty(Date.prototype, 'toObject', {
-    value() {
+    value: function toObject() {
       if (this === undefined || this === null) throw new TypeError();
 
       const dateTime = {};
@@ -85,7 +85,7 @@ if (!Date.prototype.toObject) {
 // 指定日期增加天数
 if (!Date.prototype.addDay) {
   Object.defineProperty(Date.prototype, 'addDays', {
-    value(value = 0) {
+    value: function addDay(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -98,7 +98,7 @@ if (!Date.prototype.addDay) {
 // 指定时间增加小时数
 if (!Date.prototype.addHours) {
   Object.defineProperty(Date.prototype, 'addHours', {
-    value(value = 0) {
+    value: function addHours(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -111,7 +111,7 @@ if (!Date.prototype.addHours) {
 // 指定时间增加毫秒数
 if (!Date.prototype.addMilliseconds) {
   Object.defineProperty(Date.prototype, 'addMilliseconds', {
-    value(value = 0) {
+    value: function addMilliseconds(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -124,7 +124,7 @@ if (!Date.prototype.addMilliseconds) {
 // 指定时间增加分钟数
 if (!Date.prototype.addMinutes) {
   Object.defineProperty(Date.prototype, 'addMinutes', {
-    value(value = 0) {
+    value: function addMinutes(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -137,7 +137,7 @@ if (!Date.prototype.addMinutes) {
 // 指定时间增加月数
 if (!Date.prototype.addMonths) {
   Object.defineProperty(Date.prototype, 'addMonths', {
-    value(value = 0) {
+    value: function addMonths(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -150,7 +150,7 @@ if (!Date.prototype.addMonths) {
 // 指定时间增加秒数
 if (!Date.prototype.addSeconds) {
   Object.defineProperty(Date.prototype, 'addSeconds', {
-    value(value = 0) {
+    value: function addSeconds(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
       if (isNaN(value, 10)) throw new Error('NaN');
 
@@ -163,7 +163,7 @@ if (!Date.prototype.addSeconds) {
 // 指定时间增加年数
 if (!Date.prototype.addYears) {
   Object.defineProperty(Date.prototype, 'addYears', {
-    value(value = 0) {
+    value: function addYears(value = 0) {
       if (this === undefined || this === null) throw new TypeError();
 
       if (value === 0) return this;
@@ -176,7 +176,7 @@ if (!Date.prototype.addYears) {
 // 获取指定时间的时间戳
 if (!Date.prototype.getUnixTime) {
   Object.defineProperty(Date.prototype, 'getUnixTime', {
-    value() {
+    value: function getUnixTime() {
       if (this === undefined || this === null) throw new TypeError();
 
       const _timestamp = Date.parse(this);
@@ -188,7 +188,7 @@ if (!Date.prototype.getUnixTime) {
 // 获取指定日期所在月的第一天
 if (!Date.prototype.firstDayOfMonth) {
   Object.defineProperty(Date.prototype, 'firstDayOfMonth', {
-    value() {
+    value: function firstDayOfMonth() {
       if (this === undefined || this === null) throw new TypeError();
 
       const _date = new Date(this.getTime());
@@ -201,7 +201,7 @@ if (!Date.prototype.firstDayOfMonth) {
 // 获取指定日期所在月的最后一天
 if (!Date.prototype.lastDayOfMonth) {
   Object.defineProperty(Date.prototype, 'lastDayOfMonth', {
-    value() {
+    value: function lastDayOfMonth() {
       if (this === undefined || this === null) throw new TypeError();
 
       const date = this;
@@ -216,7 +216,7 @@ if (!Date.prototype.lastDayOfMonth) {
 // 获取指定日期所属周从星期天开始的第一天
 if (!Date.prototype.firstDayOfWeekFromSunday) {
   Object.defineProperty(Date.prototype, 'firstDayOfWeekFromSunday', {
-    value() {
+    value: function firstDayOfWeekFromSunday() {
       if (this === undefined || this === null) throw new TypeError();
 
       let day = new Date(this.getTime());
@@ -230,7 +230,7 @@ if (!Date.prototype.firstDayOfWeekFromSunday) {
 // 获取指定日期所属周从星期天开始的最后一天
 if (!Date.prototype.lastDayOfWeekFromSunday) {
   Object.defineProperty(Date.prototype, 'lastDayOfWeekFromSunday', {
-    value() {
+    value: function lastDayOfWeekFromSunday() {
       if (this === undefined || this === null) throw new TypeError();
 
       const day = new Date(this.getTime());
@@ -242,7 +242,7 @@ if (!Date.prototype.lastDayOfWeekFromSunday) {
 // 获取指定日期所属周从星期一开始的第一天
 if (!Date.prototype.firstDayOfWeekFromMonday) {
   Object.defineProperty(Date.prototype, 'firstDayOfWeekFromMonday', {
-    value() {
+    value: function firstDayOfWeekFromMonday() {
       if (this === undefined || this === null) throw new TypeError();
 
       let day = new Date(this.getTime());
@@ -257,7 +257,7 @@ if (!Date.prototype.firstDayOfWeekFromMonday) {
 // 获取指定日期所属周从星期一开始的最后一天
 if (!Date.prototype.lastDayOfWeekFromMonday) {
   Object.defineProperty(Date.prototype, 'lastDayOfWeekFromMonday', {
-    value() {
+    value: function lastDayOfWeekFromMonday() {
       if (this === undefined || this === null) throw new TypeError();
 
       let day = new Date(this.getTime());
@@ -271,7 +271,7 @@ if (!Date.prototype.lastDayOfWeekFromMonday) {
 // 从指定的日期和时间中减去指定的日期和时间，并返回一个时间间隔
 if (!Date.prototype.subtract) {
   Object.defineProperty(Date.prototype, 'subtract', {
-    value(date) {
+    value: function subtract(date) {
       if (this === undefined || this === null) throw new TypeError();
       if (date === undefined || date === null) throw new TypeError();
 
