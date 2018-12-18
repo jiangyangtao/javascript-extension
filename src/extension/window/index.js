@@ -17,5 +17,3 @@ if (!window.keySort) {
     };
   };
 }
-
-export default window;

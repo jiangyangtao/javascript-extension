@@ -81,5 +81,3 @@ if (!Number.prototype.toDate) {
     },
   });
 }
-
-export default Number;

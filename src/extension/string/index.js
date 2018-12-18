@@ -423,5 +423,3 @@ if (!String.prototype.notNullAndEmpty) {
     },
   });
 }
-
-export default String;

@@ -296,5 +296,3 @@ if (!Array.prototype.replace) {
     },
   });
 }
-
-export default Array;

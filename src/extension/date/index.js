@@ -292,4 +292,3 @@ if (!Date.prototype.subtract) {
   });
 }
 
-export default Date;

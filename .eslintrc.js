@@ -35,7 +35,7 @@ module.exports = {
     "no-extend-native": [
       "error",
       {
-        exceptions: ["Number", "Object", "Array", "String", "Date"]
+        exceptions: ["Number", "Object", "Array", "String", "Date", "Math"]
       }
     ],
     // don't require .vue extension when importing
