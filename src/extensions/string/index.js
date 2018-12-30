@@ -222,6 +222,18 @@ if (!String.prototype.getAgeByIdNumber) {
   });
 }
 
+// 验证电子邮箱格式
+if (!String.prototype.isEmail) {
+  Object.defineProperty(String.prototype, 'isEmail', {
+    value: function isEmail() {
+      if (!this) throw new TypeError();
+
+      const reg = new RegExp('^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$');
+      return reg.test(this);
+    },
+  });
+}
+
 // 获取url参数值
 if (!String.prototype.getUrlParam) {
   Object.defineProperty(String.prototype, 'getUrlParam', {
@@ -250,7 +262,7 @@ if (!String.prototype.getQueryString) {
   });
 }
 
-// 获取url参数，再转换为 object
+// 将 url 参数转换为 object 对象
 if (!String.prototype.getQueryToObject) {
   Object.defineProperty(String.prototype, 'getQueryToObject', {
     value: function getQueryToObject() {

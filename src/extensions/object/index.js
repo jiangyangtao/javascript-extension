@@ -10,6 +10,24 @@ if (!Object.prototype.forEach) {
   });
 }
 
+// 将 Object 对象转换成 参数 的字符串形式
+if (!Object.prototype.toParamString) {
+  Object.defineProperty(Object.prototype, 'toParamString', {
+    value: function toParamString() {
+      if (!this) throw new TypeError();
+
+      const param = this;
+      let paramString = '';
+      for (const key in param) {
+        const value = param[key];
+        if (paramString) paramString += '&';
+        paramString += `${key}=${value}`;
+      }
+      return paramString;
+    },
+  });
+}
+
 // 检测 object 对象是否为 null 或者为 undefined
 if (!Object.prototype.isNull) {
   Object.defineProperty(Object.prototype, 'isNull', {
