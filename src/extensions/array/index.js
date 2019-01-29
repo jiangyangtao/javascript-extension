@@ -258,15 +258,11 @@ if (Array.prototype.getMinValue) {
 // 在数组头部追加元素
 if (!Array.prototype.insert) {
   Object.defineProperty(Array.prototype, 'insert', {
-    value: function insert(value) {
+    value: function insert(element) {
       if (this === undefined || this === null) throw new TypeError();
 
-      const newArray = [];
-      newArray[0] = value;
-      for (const i in this) {
-        newArray.push(this[i]);
-      }
-      return newArray;
+      this.unshift(element);
+      return this;
     },
   });
 }
@@ -274,11 +270,11 @@ if (!Array.prototype.insert) {
 // 将某值设置给 Array 中指定位置的元素
 if (!Array.prototype.setValue) {
   Object.defineProperty(Array.prototype, 'setValue', {
-    value: function setValue(index, value) {
+    value: function setValue(index, element) {
       if (this === undefined || this === null) throw new TypeError();
 
-      if (this.length <= 0 || index < 0 || index >= this.length) return this;
-      return this.splice(index, 1, value);
+      if (this.length <= 0 || index < 0 || index >= this.length) throw new TypeError('Index was outside the bounds of the array');
+      return this.splice(index, 1, element);
     },
   });
 }

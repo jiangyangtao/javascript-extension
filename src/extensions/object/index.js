@@ -28,6 +28,19 @@ if (!Object.prototype.toParamString) {
   });
 }
 
+
+// 将 Object 对象转换成 json 的字符串形式
+if (!Object.prototype.toJsonString) {
+  Object.defineProperty(Object.prototype, 'toJsonString', {
+    value: function toJsonString() {
+      if (!this) throw new TypeError();
+
+      const obj = this;      
+      return JSON.stringify(obj);
+    },
+  });
+}
+
 // 检测 object 对象是否为 null 或者为 undefined
 if (!Object.prototype.isNull) {
   Object.defineProperty(Object.prototype, 'isNull', {

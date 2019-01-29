@@ -386,6 +386,18 @@ if (!String.prototype.toFloat) {
   });
 }
 
+// String 转化为 Json 对象
+if (!String.prototype.toJson) {
+  Object.defineProperty(String.prototype, 'toJson', {
+    value: function toJson() {
+      if (!this) throw new TypeError();
+
+      const str = this;
+      return JSON.parse(str);
+    },
+  });
+}
+
 // 字符串转换为分割数组
 // symbol 分割符，默认以逗号分割
 if (!String.prototype.toSplitArray) {
