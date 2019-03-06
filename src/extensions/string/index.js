@@ -168,27 +168,27 @@ if (!String.prototype.isChinaIdentityNumber) {
 }
 
 // 根据身份证获取性别文字
-if (!String.prototype.getSexTextByChinaIdNumber) {
-  Object.defineProperty(String.prototype, 'getSexTextByChinaIdNumber', {
-    value: function getSexTextByChinaIdNumber() {
+if (!String.prototype.getGenderTextByChinaIdNumber) {
+  Object.defineProperty(String.prototype, 'getGenderTextByChinaIdNumber', {
+    value: function getGenderTextByChinaIdNumber() {
       if (!this) throw new TypeError();
 
       if (!this.isChinaIdentityNumber()) return '';
-      const _card = this;
-      return _card.substr(16, 1) % 2 ? '男' : '女';
+      const card = this;
+      return card.substr(16, 1) % 2 ? '男' : '女';
     },
   });
 }
 
-// 根据身份证获取性别数字
-if (!String.prototype.getSexNoByChinaIdNumber) {
-  Object.defineProperty(String.prototype, 'getSexNoByChinaIdNumber', {
-    value: function getSexNoByChinaIdNumber() {
+// 根据身份证获取性别数字，0：女，1：男
+if (!String.prototype.getGenderCodeByChinaIdNumber) {
+  Object.defineProperty(String.prototype, 'getGenderCodeByChinaIdNumber', {
+    value: function getGenderCodeByChinaIdNumber() {
       if (!this) throw new TypeError();
 
       if (!this.isChinaIdentityNumber()) return -1;
       const card = this;
-      return parseInt(card.substr(16, 1), 10);
+      return card.substr(16, 1) % 2;
     },
   });
 }

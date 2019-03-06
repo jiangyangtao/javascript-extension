@@ -1,14 +1,19 @@
-if (!Object.prototype.forEach) {
-  Object.defineProperty(Object.prototype, 'forEach', {
-    value: function forEach(fn, thisArg) {
-      if (this === undefined || this === null) throw new TypeError();
-      if (typeof fn !== 'function') throw new TypeError();
-      for (const key in this) {
-        if (this.hasOwnProperty(key)) fn.call(thisArg, key, this[key], this);
+if(!Object.prototype.forIn){
+  Object.defineProperty(Object.prototype,'forIn',{
+    value:function forIn(fn,thisArg) {
+      if (!this) throw new TypeError();
+      if (typeof fn !== 'function') throw new TypeError(fn + ' is not a function');
+      
+      var t;
+      const obj = this;
+      if(arguments.length > 1) t = thisArg;      
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) fn.call(t,key,obj[key],obj);
       }
-    },
+    }
   });
 }
+
 
 // 将 Object 对象转换成 参数 的字符串形式
 if (!Object.prototype.toParamString) {
