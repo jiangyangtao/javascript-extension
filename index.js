@@ -1,1 +1,1 @@
-module.exports = require('./src/extensions');
+module.exports = require('./src/extensions')
